@@ -1,2 +1,2 @@
-# go-1.17
+# go-1.20.5
 # Stay Hungry , Stay Foolish
