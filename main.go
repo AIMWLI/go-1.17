@@ -42,6 +42,8 @@ func main() {
 		Handler: r,
 	}
 	//err := r.Run(":" + strconv.Itoa(setting.ServerSetting.HttpPort))
+
+	// https://gin-gonic.com/docs/examples/graceful-restart-or-stop/
 	go func() {
 		// service connections
 		if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
