@@ -2,9 +2,8 @@ package main
 
 import (
 	"context"
-	gin "github.com/gin-gonic/gin"
-	"go-gin/middleware/handleLog"
 	"go-gin/pkg/setting"
+	"go-gin/routers"
 	"log"
 	"net/http"
 	"os"
@@ -19,26 +18,10 @@ func init() {
 }
 
 func main() {
-
-	gin.SetMode(setting.ServerSetting.RunMode)
-	r := gin.Default()
-	//r.Use(timeout.TimeoutMiddleware())
-	r.Use(handleLog.HandleLog())
-	r.GET("ping", func(context *gin.Context) {
-		//模拟响应超时
-		//time.Sleep(time.Second * 2)
-		context.JSON(http.StatusOK, gin.H{
-			"msg": "pong",
-		})
-	})
-	r.POST("/log", func(context *gin.Context) {
-		context.JSON(http.StatusOK, gin.H{
-			"msg": "handle log from console",
-		})
-	})
+	router := routers.InitRouter()
 	srv := &http.Server{
 		Addr:    ":" + strconv.Itoa(setting.ServerSetting.HttpPort),
-		Handler: r,
+		Handler: router,
 	}
 	//err := r.Run(":" + strconv.Itoa(setting.ServerSetting.HttpPort))
 
