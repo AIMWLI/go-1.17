@@ -27,8 +27,6 @@ func HandleLog() gin.HandlerFunc {
 		// 继续执行
 		//ctx.Next()
 		// 记录响应时间
-		end := time.Now()
-		stopWatch := end.Sub(start)
 		//rewrite response body in middleware
 		//https://github.com/gin-gonic/gin/issues/3384
 		/*
@@ -41,6 +39,8 @@ func HandleLog() gin.HandlerFunc {
 		*/
 		// 打印响应体
 		res := util.LogResponseBody(ctx)
+		end := time.Now()
+		stopWatch := end.Sub(start)
 		fmt.Printf("[INFO] Response: %s %s %s (%v)\n", ctx.Request.Method, ctx.Request.RequestURI, res, stopWatch)
 	}
 }

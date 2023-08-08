@@ -17,16 +17,33 @@ type Server struct {
 
 var ServerSetting = &Server{}
 
+type Database struct {
+	Type     string
+	Host     string
+	Port     string
+	User     string
+	Password string
+	DBname   string
+}
+
+var DataBaseSetting = &Database{}
+
 var cfg *ini.File
 
 func Setup() {
+	loadServer()
+	//mapTo("app", )
+}
+func loadServer() {
 	var err error
 	cfg, err = ini.Load("conf/app.ini")
 	if err != nil {
 		log.Fatalf("setting#setup fail to parse conf/app.ini: %v", err)
 	}
 	mapTo("server", ServerSetting)
-	//mapTo("app", )
+}
+func load() {
+
 }
 
 func mapTo(section string, v interface{}) {

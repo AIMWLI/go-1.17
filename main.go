@@ -16,7 +16,6 @@ import (
 
 func init() {
 	setting.Setup()
-
 }
 
 func main() {
