@@ -2,10 +2,16 @@ package setting
 
 import (
 	"github.com/go-ini/ini"
-
 	"log"
 	"time"
 )
+
+type App struct {
+	PageSize  string
+	JwtSecret string
+}
+
+var AppSetting = &App{}
 
 type Server struct {
 	RunMode      string
@@ -28,22 +34,43 @@ type Database struct {
 
 var DataBaseSetting = &Database{}
 
+type Redis struct {
+	Host        string
+	Password    string
+	MaxIdle     int
+	MaxActive   int
+	IdleTimeout time.Duration
+}
+
+var RedisSetting = &Redis{}
+
 var cfg *ini.File
 
 func Setup() {
-	loadServer()
-	//mapTo("app", )
-}
-func loadServer() {
 	var err error
 	cfg, err = ini.Load("conf/app.ini")
 	if err != nil {
 		log.Fatalf("setting#setup fail to parse conf/app.ini: %v", err)
 	}
+	loadApp()
+	loadServer()
+	loadDataBase()
+	loadRedis()
+}
+
+func loadRedis() {
+	mapTo("redis", RedisSetting)
+}
+
+func loadApp() {
+	mapTo("app", AppSetting)
+}
+func loadServer() {
 	mapTo("server", ServerSetting)
 }
-func load() {
-
+func loadDataBase() {
+	mapTo("database", DataBaseSetting)
+	log.Printf("", DataBaseSetting)
 }
 
 func mapTo(section string, v interface{}) {

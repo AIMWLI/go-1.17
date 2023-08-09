@@ -2,6 +2,8 @@ package main
 
 import (
 	"context"
+	"go-gin/models"
+	"go-gin/pkg/redis"
 	"go-gin/pkg/setting"
 	"go-gin/routers"
 	"log"
@@ -15,6 +17,8 @@ import (
 
 func init() {
 	setting.Setup()
+	models.Setup()
+	redis.Setup()
 }
 
 func main() {

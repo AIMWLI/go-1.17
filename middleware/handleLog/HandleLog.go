@@ -1,9 +1,11 @@
 package handleLog
 
 import (
+	"bytes"
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"go-gin/util"
+	"io"
 	"log"
 	"time"
 )
@@ -22,7 +24,7 @@ func HandleLog() gin.HandlerFunc {
 		if err != nil {
 			log.Fatalf("[WARN] Request err: %v\n", err)
 		}
-		// todo 多次读取请求 Body 的问题
+		ctx.Request.Body = io.NopCloser(bytes.NewBuffer(rawData)) //多次读取请求 Body 的问题
 		log.Printf("[INFO] Request: %s %s \n%s\n", ctx.Request.Method, ctx.Request.RequestURI, rawData)
 		// 继续执行
 		//ctx.Next()

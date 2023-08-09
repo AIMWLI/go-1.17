@@ -18,16 +18,32 @@ docker run -d --name myredis -p 6379:6379 redis --requirepass "123456"
 * 创建数据库go
 * 建表
 ```sql
-CREATE TABLE `blog_auth` (
+CREATE TABLE `auth` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `username` varchar(50) DEFAULT '' COMMENT '账号',
   `password` varchar(50) DEFAULT '' COMMENT '密码',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;;
 
-INSERT INTO `blog`.`blog_auth` (`id`, `username`, `password`) VALUES (null, 'test', 'test123456');
+INSERT INTO `go`.`auth` (`id`, `username`, `password`) VALUES (null, 'test', 'test123456');
 ```
 ```sql
+-- ----------------------------
+-- Table structure for user
+-- ----------------------------
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `modified_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_on` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `modified_on` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `deleted_on` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+SET FOREIGN_KEY_CHECKS = 1;
 
 ```
 # 思否 文档
@@ -64,3 +80,5 @@ page, _ := com.StrTo(c.Query("page")).Int()这个为什么不直接用strconv.At
 DOCKER_BUILDKIT=0  docker build -t gin-blog-docker .
 
 
+ini # 号处理
+https://ini.unknwon.io/docs/howto/work_with_comments
