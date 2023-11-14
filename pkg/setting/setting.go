@@ -44,6 +44,12 @@ type Redis struct {
 
 var RedisSetting = &Redis{}
 
+type Probes struct {
+	KV map[string]string
+}
+
+var ProbesSetting = &Probes{}
+
 var cfg *ini.File
 
 func Setup() {
@@ -56,6 +62,12 @@ func Setup() {
 	loadServer()
 	loadDataBase()
 	loadRedis()
+	loadProbes()
+}
+
+func loadProbes() {
+	section := cfg.Section("probes")
+	ProbesSetting.KV = section.KeysHash()
 }
 
 func loadRedis() {

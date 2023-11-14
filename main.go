@@ -6,6 +6,7 @@ import (
 	"go-gin/pkg/redis"
 	"go-gin/pkg/setting"
 	"go-gin/routers"
+	"go-gin/service"
 	"log"
 	"net/http"
 	"os"
@@ -19,6 +20,7 @@ func init() {
 	setting.Setup()
 	models.Setup()
 	redis.Setup()
+	service.StartLivenessProbesJob()
 }
 
 func main() {
