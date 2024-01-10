@@ -29,7 +29,7 @@ func StartLivenessProbesJob() {
 			}
 			if err != nil {
 				//fmt.Printf("%v %v", k, err)
-				fmt.Errorf("failed to fetch URL %s : %s", v, resp.Status)
+				_ = fmt.Errorf("failed to fetch URL %s : %s", v, resp.Status)
 			}
 			if resp.StatusCode != http.StatusOK {
 				SendMsgToBot("探针检测异常", k, v)
@@ -55,11 +55,11 @@ func StartLivenessProbesJob() {
 
 func SendMsgToBot(msg string, k string, v string) {
 	//receiveId["nlp"] = "oc_532f1e2b627dd390434eba76cbe2b79a"
-	receiveId := map[string]string{"asr": "oc_aa573b380df9e8fde91a106f772dea35", "ocr": "oc_4c9f691580dee41d3b6e63643182e14c",
-		"nlp": "oc_532f1e2b627dd390434eba76cbe2b79a", "wenda": "oc_ca3ca124143d8c10fd6cdc4c078aee10",
-		"stamp": "oc_4c9f691580dee41d3b6e63643182e14c",
+	receiveId := map[string]string{"asr": "111", "ocr": "222",
+		"nlp": "333", "wenda": "444",
+		"stamp": "555",
 	}
-	botUrl := "http://10.201.218.30:8501/send_to_feishu/send_text"
+	botUrl := "http://1.2.3.4:8501/send_to_feishu/send_text"
 	values := url.Values{}
 	//values.Add("receive_id", "oc_ca3ca124143d8c10fd6cdc4c078aee10") // wenda
 	//values.Add("receive_id", "oc_532f1e2b627dd390434eba76cbe2b79a") // nlp
