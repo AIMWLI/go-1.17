@@ -50,9 +50,6 @@ func StartLivenessProbesJob() {
 	c.Start()
 }
 
-//receiveId["asr"] = "oc_aa573b380df9e8fde91a106f772dea35"
-//receiveId["ocr"] = "oc_bbaa1949e2267b73c3cc32e2e36d448d"
-
 func SendMsgToBot(msg string, k string, v string) {
 	//receiveId["nlp"] = "oc_532f1e2b627dd390434eba76cbe2b79a"
 	receiveId := map[string]string{"asr": "111", "ocr": "222",
