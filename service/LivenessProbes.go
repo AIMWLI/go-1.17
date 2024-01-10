@@ -58,10 +58,6 @@ func SendMsgToBot(msg string, k string, v string) {
 	}
 	botUrl := "http://1.2.3.4:8501/send_to_feishu/send_text"
 	values := url.Values{}
-	//values.Add("receive_id", "oc_ca3ca124143d8c10fd6cdc4c078aee10") // wenda
-	//values.Add("receive_id", "oc_532f1e2b627dd390434eba76cbe2b79a") // nlp
-	//values.Add("receive_id", "oc_bbaa1949e2267b73c3cc32e2e36d448d") // ocr
-	//values.Add("receive_id", "oc_aa573b380df9e8fde91a106f772dea35") // asr
 	values.Add("receive_id", receiveId[k])
 	values.Add("text", "<at user_id=\\\\\\\"all\\\\\\\">ALL</at> "+"\\\\n "+k+" "+msg+",\\\\n url: "+v+", \\\\n please check")
 	client := util.GetHttpClient()
