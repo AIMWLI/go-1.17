@@ -15,7 +15,8 @@
 
 FROM alpine
 WORKDIR /build
-RUN  #go mod tidy && CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o go-gin .
+#RUN go mod tidy && CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o go-gin .
+#RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags="-w -s" -o go-gin .
 COPY go-gin .
 ENV GOPROXY https://goproxy.cn,direct
 ADD go.mod .
